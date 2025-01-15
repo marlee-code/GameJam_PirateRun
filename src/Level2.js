@@ -85,11 +85,11 @@ export default class Level2 extends Phaser.Scene {
     this.keys.right = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.RIGHT,
     );
-    this.keys.up = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.UP,
+    this.keys.SPACE = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE,
     );
 
-    this.keys.up.on("down", () => {
+    this.keys.SPACE.on("down", () => {
       this.player.jump();
     });
 
