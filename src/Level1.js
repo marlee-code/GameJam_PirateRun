@@ -11,7 +11,7 @@ import Phaser from "phaser";
 export default class Level1 extends Phaser.Scene {
   constructor() {
     super({ key: "Level1" });
-    this.stoneGroup = null; // Groupe de pierres
+    this.floorGroup = null; // Groupe de sol
     this.player = null; // Instance du joueur
     this.chicken = null; // Instance du poulet
     this.keys = {}; // Stocke les touches
@@ -36,20 +36,19 @@ export default class Level1 extends Phaser.Scene {
     // La largeur (8000) peut être adaptée à la taille totale du monde.
 
     this.add
-      .text(levelWidth / 6, levelHeight / 7, "Level1")
-      .setOrigin(0.5, 1)
-      .setStyle({
-        fontSize: 30,
+      .text(10, 10, "Level  1", {
+        fontSize: "30px",
         fontStyle: "bold",
-      });
+      })
+      .setScrollFactor(0);
 
     // Définir les limites du monde physique
     this.physics.world.setBounds(0, 0, levelWidth, levelHeight);
 
     // Configurer les blocs de sable
-    this.stoneGroup = new SandGroup(this);
-    this.stoneGroup.addTiles(0, 9, 100, 1); // Sol de pierres (col 0-99, ligne 9)
-    this.stoneGroup.addTiles(0, 8, 100, 1); // Sol de pierres (col 0-99, ligne 8)
+    this.floorGroup = new SandGroup(this);
+    this.floorGroup.addTiles(0, 9, 100, 1); // Sol de pierres (col 0-99, ligne 9)
+    this.floorGroup.addTiles(0, 8, 100, 1); // Sol de pierres (col 0-99, ligne 8)
 
     // Configurer la caméra
     this.cameras.main.setBounds(0, 0, levelWidth, levelHeight); // Limites de la caméra
@@ -57,11 +56,11 @@ export default class Level1 extends Phaser.Scene {
 
     // Ajouter un joueur
     this.player = new Player(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
-    this.physics.add.collider(this.player, this.stoneGroup); // Gestion des collisions
+    this.physics.add.collider(this.player, this.floorGroup); // Gestion des collisions
 
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
-    this.physics.add.collider(this.chicken, this.stoneGroup); // Gestion des collisions
+    this.physics.add.collider(this.chicken, this.floorGroup); // Gestion des collisions
 
     // Faire suivre la caméra au joueur
     this.cameras.main.startFollow(this.player);
