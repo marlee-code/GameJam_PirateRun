@@ -25,7 +25,8 @@ export default class Level2 extends Phaser.Scene {
     DirtGroup.preload(this); // Précharge l'image pour l'herbe.
     Player.preload(this); // Charge l'image du joueur
     Chicken.preload(this); // Charge l'image du poulet
-    this.load.image("tropicalBackground", "img/tropic.webp");
+    this.load.image("tropicalForestBackground", "img/tropical_forest.webp");
+    this.load.image("wood", "img/wood.png");
   }
 
   create() {
@@ -34,17 +35,19 @@ export default class Level2 extends Phaser.Scene {
     const levelHeight = 9 * 64; // 9 lignes de 64 pixels (hauteur totale du niveau)
 
     this.background = this.add
-      .tileSprite(0, 0, 8000, 600, "tropicalBackground")
+      .tileSprite(0, 0, 8000, 600, "tropicalForestBackground")
       .setOrigin(0, 0);
     // La largeur (8000) peut être adaptée à la taille totale du monde.
 
+    // Ajouter l'image de fond pour le titre
+    this.add.image(0, 10, "wood").setOrigin(0, 0).setScrollFactor(0);
+
     this.add
-      .text(levelWidth / 6, levelHeight / 7, "Level2")
-      .setOrigin(0.5, 1)
-      .setStyle({
-        fontSize: 30,
+      .text(10, 25, "Level  2", {
+        fontSize: "30px",
         fontStyle: "bold",
-      });
+      })
+      .setScrollFactor(0);
 
     // Définir les limites du monde physique
     this.physics.world.setBounds(0, 0, levelWidth, levelHeight);
