@@ -41,7 +41,7 @@ export default class Chicken extends Phaser.GameObjects.Sprite {
   }
 
   moveRight() {
-    this.#move(300);
+    this.#move(500);
     return this;
   }
 }
