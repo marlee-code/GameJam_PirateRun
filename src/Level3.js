@@ -66,6 +66,14 @@ export default class Level3 extends Phaser.Scene {
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.stoneGroup); // Gestion des collisions
 
+    this.physics.add.overlap(
+      this.player,
+      this.chicken,
+      this.nextLevel,
+      null,
+      this,
+    );
+
     // Faire suivre la caméra au joueur
     this.cameras.main.startFollow(this.player);
 
@@ -82,6 +90,11 @@ export default class Level3 extends Phaser.Scene {
     });
 
     this.#handleInput();
+  }
+
+  nextLevel() {
+    this.scene.start("End");
+    this.scene.stop("Level3");
   }
 
   #handleInput() {
