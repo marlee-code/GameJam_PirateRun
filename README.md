@@ -24,3 +24,7 @@ sudo apt install npm
 ```
 npm run dev
 ```
+
+
+Sound Effect by freesound_community from Pixabay
+game-start.mp3
