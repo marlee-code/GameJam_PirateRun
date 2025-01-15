@@ -4,6 +4,7 @@ import Pirate from "./Pirate";
 import Chicken from "./Chicken";
 
 import Phaser from "phaser";
+import PlatformGroup from "./PlatformGroup";
 
 /**
  * Scène du premier niveau.
@@ -22,8 +23,11 @@ export default class Level1 extends Phaser.Scene {
     SandGroup.preload(this); // Précharge l'image pour les pierres.
     Pirate.preload(this); // Charge l'image du joueur
     Chicken.preload(this); // Charge l'image du poulet
+    PlatformGroup.preload(this); // Charge l'image de la plateforme
     this.load.image("tropicalBackground", "img/tropic.webp");
     this.load.image("wood", "img/wood.png");
+    this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
+    this.load.image("tutoriel2", "img/tutoriel2.png"); // Charge l'image du tutoriel2
   }
 
   create() {
@@ -46,6 +50,40 @@ export default class Level1 extends Phaser.Scene {
       })
       .setScrollFactor(0);
 
+    // Ajouter l'image du tutoriel2 à côté de l'image du tutoriel
+    const tutoriel2Image = this.add
+      .image(this.cameras.main.width - 10, 10, "tutoriel2")
+      .setOrigin(1, 0)
+      .setScrollFactor(0);
+
+    // Ajouter l'image du tutoriel en haut à droite de l'écran
+    const tutorielImage = this.add
+      .image(
+        this.cameras.main.width - 20 - tutoriel2Image.width,
+        10,
+        "tutoriel",
+      )
+      .setOrigin(1, 0)
+      .setScrollFactor(0);
+
+    // Animer l'image du tutoriel pour qu'elle disparaisse après 5 secondes
+    this.tweens.add({
+      targets: tutorielImage,
+      alpha: 0,
+      ease: "Power1",
+      duration: 1000, // Durée de l'animation (1 seconde)
+      delay: 5000, // Délai avant le début de l'animation (5 secondes)
+    });
+
+    // Animer l'image du tutoriel2 pour qu'elle disparaisse après 17 secondes
+    this.tweens.add({
+      targets: tutoriel2Image,
+      alpha: 0,
+      ease: "Power1",
+      duration: 1000, // Durée de l'animation (1 seconde)
+      delay: 17000, // Délai avant le début de l'animation (17 secondes)
+    });
+
     // Définir les limites du monde physique
     this.physics.world.setBounds(0, 0, levelWidth, levelHeight);
 
@@ -54,6 +92,16 @@ export default class Level1 extends Phaser.Scene {
     this.floorGroup.addTiles(0, 9, 100, 1); // Sol de pierres (col 0-99, ligne 9)
     this.floorGroup.addTiles(0, 8, 100, 1); // Sol de pierres (col 0-99, ligne 8)
 
+    //Ajout des blocs de platforme
+    this.platformGroup = new PlatformGroup(this);
+    this.platformGroup.addTiles(4, 6, 3, 1); // Sol de pierres (col 4-6, ligne 7)
+    this.platformGroup.addTiles(10, 5, 7, 1); // Sol de pierres (col 10-16, ligne 6)
+    this.platformGroup.addTiles(20, 6, 6, 1); // Sol de pierres (col 20-25, ligne 7)
+    this.platformGroup.addTiles(40, 6, 3, 1); // Sol de pierres (col 40-42, ligne 7)
+    this.platformGroup.addTiles(45, 4, 10, 1); // Sol de pierres (col 40-49, ligne 5)
+    this.platformGroup.addTiles(60, 6, 8, 1); // Sol de pierres (col 60-65, ligne 7)
+    this.platformGroup.addTiles(70, 4, 6, 1); // Sol de pierres (col 70-75, ligne 5)
+
     // Configurer la caméra
     this.cameras.main.setBounds(0, 0, levelWidth, levelHeight); // Limites de la caméra
     this.cameras.main.setZoom(1);
@@ -61,6 +109,7 @@ export default class Level1 extends Phaser.Scene {
     // Ajouter un joueur
     this.player = new Pirate(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
     this.physics.add.collider(this.player, this.floorGroup); // Gestion des collisions
+    this.physics.add.collider(this.player, this.platformGroup); // Gestion des collisions
 
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
