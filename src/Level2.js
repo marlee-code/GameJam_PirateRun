@@ -11,7 +11,7 @@ import Phaser from "phaser";
  */
 export default class Level2 extends Phaser.Scene {
   constructor() {
-    super({ key: "Level1" });
+    super({ key: "Level2" });
     this.grassGroup = null; // Groupe de terres
     this.dirtGroup = null; // Groupe de terres
     this.player = null; // Instance du joueur
