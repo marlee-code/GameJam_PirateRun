@@ -123,6 +123,10 @@ export default class Level1 extends Phaser.Scene {
     this.knightGroup.addKnight(5, 4); // Position initiale : (5, 4)
     this.knightGroup.addKnight(15, 4); // Position initiale : (15, 4)
     this.knightGroup.addKnight(25, 6); // Position initiale : (25, 4)
+    this.knightGroup.addKnight(40, 4); // Position initiale : (40, 4)
+    this.knightGroup.addKnight(60, 4); // Position initiale : (60, 4)
+    this.knightGroup.addKnight(66, 6); // Position initiale : (66, 6)
+    this.knightGroup.addKnight(78, 6); // Position initiale : (78, 6)
 
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
