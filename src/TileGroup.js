@@ -20,6 +20,10 @@ export default class TileGroup extends Phaser.Physics.Arcade.StaticGroup {
           this.tileName,
         ).setOrigin(0, 0);
         tile.body.updateFromGameObject();
+        // Désactiver les collisions sur les côtés et en dessous
+        tile.body.checkCollision.left = false;
+        tile.body.checkCollision.right = false;
+        tile.body.checkCollision.down = false;
       }
     }
     return this;
