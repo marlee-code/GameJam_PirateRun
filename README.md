@@ -19,3 +19,8 @@ code .
 sudo apt update
 sudo apt install npm
 ```
+
+## Lancer le jeu en mode dev 
+```
+npm run dev
+```
