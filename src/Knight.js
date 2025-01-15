@@ -15,6 +15,8 @@ export default class Knight extends Phaser.GameObjects.Sprite {
     // Configurer le corps physique
     this.body.setGravityY(1000); // Applique la gravité au joueur
     this.body.setCollideWorldBounds(true); // Empêche de sortir des limites
+    this.body.immovable = true; // Empêche le déplacement lors des collisions
+    this.body.pushable = false; // Empêche d'être poussé par d'autres objets
 
     this.currentTween = null; // Stocke le tween actif
   }
