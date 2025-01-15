@@ -6,6 +6,8 @@ import Pirate from "./Pirate";
 import Chicken from "./Chicken";
 
 import Phaser from "phaser";
+import KnightGroup from "./KnightGroup";
+import Knight from "./Knight";
 
 /**
  * Scène du deuxième niveau.
@@ -25,7 +27,9 @@ export default class Level2 extends Phaser.Scene {
     GrassGroup.preload(this); // Précharge l'image pour la terre.
     DirtGroup.preload(this); // Précharge l'image pour l'herbe.
     Pirate.preload(this); // Charge l'image du joueur
+    Knight.preload(this); // Charge l'image du knight
     Chicken.preload(this); // Charge l'image du poulet
+    PlatformGroup.preload(this); // Charge l'image de la plateforme
     this.load.image("tropicalForestBackground", "img/tropical_forest.webp");
     this.load.image("wood", "img/wood.png");
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
@@ -117,6 +121,21 @@ export default class Level2 extends Phaser.Scene {
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.grassGroup); // Gestion des collisions
+
+    // Ajouter des chevaliers
+    this.knightGroup = new KnightGroup(this);
+    this.knightGroup.addKnight(5, 4); // Position initiale : (5, 4)
+    this.knightGroup.addKnight(15, 4); // Position initiale : (15, 4)
+    this.knightGroup.addKnight(25, 6); // Position initiale : (25, 4)
+
+    // Gestion des collisions entre le joueur et les chevaliers
+    this.physics.add.collider(this.player, this.knightGroup, () => {
+      this.player.setPosition(1, 4); // Réinitialiser la position du joueur
+    });
+
+    // Gestion des collisions entre le sol et les chevaliers
+    this.physics.add.collider(this.knightGroup, this.floorGroup);
+    this.physics.add.collider(this.knightGroup, this.platformGroup);
 
     this.physics.add.overlap(
       this.player,
