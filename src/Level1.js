@@ -31,6 +31,7 @@ export default class Level1 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png");
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.image("tutoriel2", "img/tutoriel2.png"); // Charge l'image du tutoriel2
+    this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
   }
 
   create() {
@@ -110,9 +111,11 @@ export default class Level1 extends Phaser.Scene {
     this.cameras.main.setZoom(1);
 
     // Ajouter un joueur
-    this.player = new Pirate(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
+    this.player = new Pirate(this, 1, 6); // Position initiale : (1, 4), ajusté pour être sur la plateforme
     this.physics.add.collider(this.player, this.floorGroup); // Gestion des collisions
     this.physics.add.collider(this.player, this.platformGroup); // Gestion des collisions
+
+    this.sound.add("game-start").play();
 
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
@@ -130,7 +133,7 @@ export default class Level1 extends Phaser.Scene {
 
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
-      this.player.setPosition(1, 4); // Réinitialiser la position du joueur
+      this.resetPlayerPositionWithDelay();
     });
 
     // Gestion des collisions entre le sol et les chevaliers
@@ -149,9 +152,6 @@ export default class Level1 extends Phaser.Scene {
     this.cameras.main.startFollow(this.player);
 
     // Configuration des touches
-    this.keys.right = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.RIGHT,
-    );
     this.keys.space = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE,
     );
@@ -160,7 +160,7 @@ export default class Level1 extends Phaser.Scene {
       this.player.jump();
     });
 
-    this.#handleInput();
+    this.#handleMove();
   }
 
   nextLevel() {
@@ -168,17 +168,15 @@ export default class Level1 extends Phaser.Scene {
     this.scene.stop("Level1");
   }
 
-  #handleInput() {
-    this.keys.right.on("down", () => this.#handleMove());
-    this.keys.right.on("up", () => this.#handleMove());
+  #handleMove() {
+    this.player.moveRight(); // Se déplace à droite
+    this.chicken.moveRight(); // Le poulet se déplace à droite
   }
 
-  #handleMove() {
-    const right = this.keys.right.isDown;
-
-    if (right) {
-      this.player.moveRight(); // Se déplace à droite
-      this.chicken.moveRight(); // Le poulet se déplace à droite
-    }
+  resetPlayerPositionWithDelay() {
+    this.player.setPosition(1 * 64, 6 * 64); // Position initiale : (1, 6)
+    this.time.delayedCall(200, () => {
+      this.#handleMove();
+    });
   }
 }
