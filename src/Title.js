@@ -24,12 +24,12 @@ export default class Title extends Phaser.Scene {
     // La largeur (8000) peut être adaptée à la taille totale du monde.
 
     const title = this.add
-      .text(width / 2, height / 2, "pirateRun")
+      .text(width / 2, height / 3, "Pirate Run")
       .setOrigin(0.5, 1)
       .setStyle({
         fontSize: 40,
         fontStyle: "bold",
-      });
+      }).setColor("black");
 
     this.tweens.add({
       targets: title,
@@ -40,6 +40,21 @@ export default class Title extends Phaser.Scene {
         title.setStyle(target);
       },
     });
+
+    const xToStart = this.add
+      .text(width / 2, 2*(height / 3), "Pressez la barre espace pour commencer")
+      .setOrigin(0.5, 1)
+      .setStyle({
+        fontSize: 20,
+      })
+      .setColor("black");
+
+    const credits = this.add
+      .text(width / 2, height-15, "© Gamejam 2025 - Crée par NO_DATA_STUDIO")
+      .setOrigin(0.5, 1)
+      .setStyle({
+        fontSize: 15,
+      }).setColor("black");
 
     this.input.once(
       "pointerdown",
