@@ -1,6 +1,6 @@
 import SandGroup from "./SandGroup";
 
-import Player from "./Player";
+import Pirate from "./Pirate";
 import Chicken from "./Chicken";
 
 import Phaser from "phaser";
@@ -20,7 +20,7 @@ export default class Level1 extends Phaser.Scene {
 
   preload() {
     SandGroup.preload(this); // Précharge l'image pour les pierres.
-    Player.preload(this); // Charge l'image du joueur
+    Pirate.preload(this); // Charge l'image du joueur
     Chicken.preload(this); // Charge l'image du poulet
     this.load.image("tropicalBackground", "img/tropic.webp");
     this.load.image("wood", "img/wood.png");
@@ -59,7 +59,7 @@ export default class Level1 extends Phaser.Scene {
     this.cameras.main.setZoom(1);
 
     // Ajouter un joueur
-    this.player = new Player(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
+    this.player = new Pirate(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
     this.physics.add.collider(this.player, this.floorGroup); // Gestion des collisions
 
     // Ajouter un poulet

@@ -3,11 +3,11 @@ import Phaser from "phaser";
 /**
  * Player class.
  */
-export default class Player extends Phaser.GameObjects.Sprite {
-  static key = "player";
+export default class Pirate extends Phaser.GameObjects.Sprite {
+  static key = "pirate";
 
   constructor(scene, x, y) {
-    super(scene, 64 * x, 64 * y - 40, Player.key);
+    super(scene, 64 * x, 64 * y - 40, Pirate.key);
     scene.add.existing(this); // Ajoute l'objet à la scène
     scene.physics.add.existing(this); // Ajoute un corps physique
     this.setOrigin(0, 0); // Définit l'origine en haut à gauche
@@ -20,7 +20,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   static preload(scene) {
-    scene.load.spritesheet(Player.key, "img/pirate.png", {
+    scene.load.spritesheet(Pirate.key, "img/pirate.png", {
       frameWidth: 256,
       frameHeight: 256,
     });

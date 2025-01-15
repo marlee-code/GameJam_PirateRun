@@ -1,7 +1,7 @@
 import GrassGroup from "./GrassGroup";
 import DirtGroup from "./DirtGroup";
 
-import Player from "./Player";
+import Pirate from "./Pirate";
 import Chicken from "./Chicken";
 
 import Phaser from "phaser";
@@ -23,7 +23,7 @@ export default class Level2 extends Phaser.Scene {
   preload() {
     GrassGroup.preload(this); // Précharge l'image pour la terre.
     DirtGroup.preload(this); // Précharge l'image pour l'herbe.
-    Player.preload(this); // Charge l'image du joueur
+    Pirate.preload(this); // Charge l'image du joueur
     Chicken.preload(this); // Charge l'image du poulet
     this.load.image("tropicalForestBackground", "img/tropical_forest.webp");
     this.load.image("wood", "img/wood.png");
@@ -63,7 +63,7 @@ export default class Level2 extends Phaser.Scene {
     this.cameras.main.setZoom(1);
 
     // Ajouter un joueur
-    this.player = new Player(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
+    this.player = new Pirate(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
     this.physics.add.collider(this.player, this.grassGroup); // Gestion des collisions
 
     // Ajouter un poulet
