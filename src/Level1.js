@@ -23,6 +23,7 @@ export default class Level1 extends Phaser.Scene {
     Player.preload(this); // Charge l'image du joueur
     Chicken.preload(this); // Charge l'image du poulet
     this.load.image("tropicalBackground", "img/tropic.webp");
+    this.load.image("wood", "img/wood.png");
   }
 
   create() {
@@ -35,8 +36,11 @@ export default class Level1 extends Phaser.Scene {
       .setOrigin(0, 0);
     // La largeur (8000) peut être adaptée à la taille totale du monde.
 
+    // Ajouter l'image de fond pour le titre
+    this.add.image(0, 10, "wood").setOrigin(0, 0).setScrollFactor(0);
+
     this.add
-      .text(10, 10, "Level  1", {
+      .text(10, 25, "Level  1", {
         fontSize: "30px",
         fontStyle: "bold",
       })
