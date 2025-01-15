@@ -20,7 +20,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   static preload(scene) {
-    scene.load.spritesheet(Player.key, "img/temp_pirate.png", {
+    scene.load.spritesheet(Player.key, "img/pirate.png", {
       frameWidth: 256,
       frameHeight: 256,
     });
