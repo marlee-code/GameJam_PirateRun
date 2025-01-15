@@ -66,7 +66,13 @@ export default class Level1 extends Phaser.Scene {
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.floorGroup); // Gestion des collisions
 
-    this.physics.add.overlap(this.player, this.chicken, this.nextLevel, null, this);
+    this.physics.add.overlap(
+      this.player,
+      this.chicken,
+      this.nextLevel,
+      null,
+      this,
+    );
 
     // Faire suivre la caméra au joueur
     this.cameras.main.startFollow(this.player);
