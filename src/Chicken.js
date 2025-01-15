@@ -20,7 +20,7 @@ export default class Chicken extends Phaser.GameObjects.Sprite {
   }
 
   static preload(scene) {
-    scene.load.spritesheet(Chicken.key, "img/temp_chicken.png", {
+    scene.load.spritesheet(Chicken.key, "img/chicken.png", {
       frameWidth: 256,
       frameHeight: 256,
     });
