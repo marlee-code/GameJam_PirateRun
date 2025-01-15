@@ -221,11 +221,11 @@ class Level1 extends Phaser.Scene {
 class Title extends Phaser.Scene {
   constructor() {
     super({ key: "Title" });
+    this.background = null; // Arrière-plan
   }
 
   preload() {
-    // Charger l'image de fond
-    this.load.image("background", "img/fond.png");
+    this.load.image("tropicalBackground", "img/tropic.webp");
   }
 
   create() {
@@ -233,10 +233,10 @@ class Title extends Phaser.Scene {
     const width = this.cameras.main.width; // Largeur de la scène
     const height = this.cameras.main.height; // Hauteur de la scène
 
-    // Ajouter le fond défilant
     this.background = this.add
-      .tileSprite(0, 0, width, height, "background")
+      .tileSprite(0, 0, 800, 1024, "tropicalBackground")
       .setOrigin(0, 0);
+    // La largeur (8000) peut être adaptée à la taille totale du monde.
 
     const title = this.add
       .text(width / 2, height / 2, "pirateRun")
@@ -268,7 +268,9 @@ class Title extends Phaser.Scene {
 
   update() {
     // Faire défiler le fond du haut vers le bas
-    this.background.tilePositionY += 0.2; // Ajuster la vitesse si nécessaire
+    if (this.background.tilePositionY < 256) {
+      this.background.tilePositionY += 0.1; // Ajuster la vitesse si nécessaire
+    }
   }
 }
 
