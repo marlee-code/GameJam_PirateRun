@@ -62,13 +62,13 @@ export default class Title extends Phaser.Scene {
         fontSize: 15,
       })
       .setColor("black");
-    
+
     this.keys = {};
-    
+
     this.keys.SPACE = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE,
     );
-    
+
     this.keys.SPACE.on("down", () => {
       this.scene.start("Level1");
       this.scene.stop("Title");
