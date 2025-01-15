@@ -48,7 +48,7 @@ export default class Pirate extends Phaser.GameObjects.Sprite {
   jump() {
     if (this.body.blocked.down) {
       // Vérifie que le joueur touche le sol
-      this.body.setVelocityY(-700); // Applique une force vers le haut
+      this.body.setVelocityY(-800); // Applique une force vers le haut
     }
     return this;
   }
