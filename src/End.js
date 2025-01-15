@@ -30,6 +30,23 @@ export default class End extends Phaser.Scene {
       .setOrigin(0.5, 0)
       .setColor("black");
 
+    // Ajouter un remerciement
+    const thanks = this.add
+      .text(width / 2, -10, "Merci d'avoir joué !", {
+        fontSize: "40px",
+        fontStyle: "bold",
+      })
+      .setOrigin(0.5, 0)
+      .setColor("black");
+
+    // Ajouter le nom des auteurs
+    const authors = this.add
+      .text(width / 2, -10, "COLLARD Marion - CADALEN Adrien", {
+        fontSize: "20px",
+      })
+      .setOrigin(0.5, 0)
+      .setColor("black");
+
     // Ajouter le texte des copyrights
     const copyright = this.add
       .text(width / 2, -15, "© Gamejam 2025 - Crée par NO_DATA_STUDIO", {
@@ -38,12 +55,30 @@ export default class End extends Phaser.Scene {
       .setOrigin(0.5, 0)
       .setColor("black");
 
+    // Animer les nom pour qu'il défile du haut vers le bas
+    this.tweens.add({
+      targets: thanks,
+      y: height / 2 + 40,
+      ease: "Power1",
+      duration: 3200,
+      delay: 500,
+    });
+
+    // Animer les nom pour qu'il défile du haut vers le bas
+    this.tweens.add({
+      targets: authors,
+      y: height - 60,
+      ease: "Power1",
+      duration: 3200,
+      delay: 500,
+    });
+
     // Animer le titre pour qu'il défile du haut vers le bas
     this.tweens.add({
       targets: title,
       y: height / 2 - 40,
       ease: "Power1",
-      duration: 3000,
+      duration: 4000,
       delay: 500,
     });
 
