@@ -1,13 +1,12 @@
 import StoneGroup from "./StoneGroup";
 import PlatformGroup from "./PlatformGroup";
 
+import KnightGroup from "./KnightGroup";
+import Knight from "./Knight";
 import Pirate from "./Pirate";
 import Chicken from "./Chicken";
 
 import Phaser from "phaser";
-
-import KnightGroup from "./KnightGroup";
-import Knight from "./Knight";
 
 /**
  * Scène du deuxième niveau.
@@ -15,7 +14,7 @@ import Knight from "./Knight";
 export default class Level3 extends Phaser.Scene {
   constructor() {
     super({ key: "Level3" });
-    this.stoneGroup = null; // Groupe de pierres
+    this.stoneGroup = null; // Groupe de blocks de pierres
     this.player = null; // Instance du joueur
     this.chicken = null; // Instance du poulet
     this.keys = {}; // Stocke les touches
@@ -23,21 +22,20 @@ export default class Level3 extends Phaser.Scene {
   }
 
   preload() {
-    StoneGroup.preload(this);
-    Pirate.preload(this); // Charge l'image du joueur
+    StoneGroup.preload(this); // Précharge l'image pour les pierres.
+    Pirate.preload(this); // Charge l'image du pirate
     Chicken.preload(this); // Charge l'image du poulet
-    Knight.preload(this); // Charge l'image du knight
+    Knight.preload(this); // Charge l'image du chevalier
     PlatformGroup.preload(this); // Charge l'image de la plateforme
-    this.load.image("castle_wall", "img/castlewall.png");
-    this.load.image("wood", "img/wood.png");
+    this.load.image("castle_wall", "img/castlewall.png"); // Charge l'image de fond
+    this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
-    this.load.image("tutoriel2", "img/tutoriel2.png"); // Charge l'image du tutoriel2
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
   }
 
   create() {
     // Dimensions du niveau
-    const levelWidth = 23 * 64 * 4; // 24 colonnes de 64 pixels (largeur totale du niveau)
+    const levelWidth = 23 * 64 * 4; // 23*4 colonnes de 64 pixels (largeur totale du niveau)
     const levelHeight = 9 * 64; // 9 lignes de 64 pixels (hauteur totale du niveau)
 
     this.background = this.add
@@ -56,37 +54,18 @@ export default class Level3 extends Phaser.Scene {
       .setScrollFactor(0);
 
     // Ajouter l'image du tutoriel2 à côté de l'image du tutoriel
-    const tutoriel2Image = this.add
-      .image(this.cameras.main.width - 10, 10, "tutoriel2")
-      .setOrigin(1, 0)
-      .setScrollFactor(0);
-
-    // Ajouter l'image du tutoriel en haut à droite de l'écran
     const tutorielImage = this.add
-      .image(
-        this.cameras.main.width - 20 - tutoriel2Image.width,
-        10,
-        "tutoriel",
-      )
+      .image(this.cameras.main.width - 10, 10, "tutoriel")
       .setOrigin(1, 0)
       .setScrollFactor(0);
 
-    // Animer l'image du tutoriel pour qu'elle disparaisse après 5 secondes
+    // Animer l'image du tutoriel pour qu'elle disparaisse après 10 secondes
     this.tweens.add({
       targets: tutorielImage,
       alpha: 0,
       ease: "Power1",
       duration: 1000, // Durée de l'animation (1 seconde)
-      delay: 5000, // Délai avant le début de l'animation (5 secondes)
-    });
-
-    // Animer l'image du tutoriel2 pour qu'elle disparaisse après 17 secondes
-    this.tweens.add({
-      targets: tutoriel2Image,
-      alpha: 0,
-      ease: "Power1",
-      duration: 1000, // Durée de l'animation (1 seconde)
-      delay: 17000, // Délai avant le début de l'animation (17 secondes)
+      delay: 10000, // Délai avant le début de l'animation (10 secondes)
     });
 
     // Définir les limites du monde physique
@@ -111,6 +90,14 @@ export default class Level3 extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, levelWidth, levelHeight); // Limites de la caméra
     this.cameras.main.setZoom(1);
 
+    // Créer les animations pour le pirate
+    this.anims.create({
+      key: "walk",
+      frames: this.anims.generateFrameNumbers("pirate", { start: 0, end: 7 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
     // Ajouter un joueur
     this.player = new Pirate(this, 1, 4); // Position initiale : (1, 4), ajusté pour être sur la plateforme
     this.physics.add.collider(this.player, this.stoneGroup); // Gestion des collisions
@@ -122,6 +109,14 @@ export default class Level3 extends Phaser.Scene {
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.stoneGroup); // Gestion des collisions
 
+    // Créer l'animation pour le chevalier
+    this.anims.create({
+      key: "knight_walk",
+      frames: this.anims.generateFrameNumbers("knight", { start: 0, end: 5 }),
+      frameRate: 3,
+      repeat: -1,
+    });
+
     // Ajouter des chevaliers
     this.knightGroup = new KnightGroup(this);
     this.knightGroup.addKnight(5, 6); // Position initiale : (5, 6)
@@ -132,9 +127,14 @@ export default class Level3 extends Phaser.Scene {
     this.knightGroup.addKnight(66, 6); // Position initiale : (66, 6)
     this.knightGroup.addKnight(78, 6); // Position initiale : (78, 6)
 
+    // Jouer l'animation pour chaque chevalier
+    this.knightGroup.children.iterate((knight) => {
+      knight.anims.play("knight_walk");
+    });
+
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
-      this.player.setPosition(1, 4); // Réinitialiser la position du joueur
+      this.resetPlayerPositionWithDelay();
     });
 
     // Gestion des collisions entre le sol et les chevaliers
@@ -152,10 +152,6 @@ export default class Level3 extends Phaser.Scene {
     // Faire suivre la caméra au joueur
     this.cameras.main.startFollow(this.player);
 
-    // Configuration des touches
-    this.keys.right = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.RIGHT,
-    );
     this.keys.SPACE = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SPACE,
     );
@@ -164,7 +160,7 @@ export default class Level3 extends Phaser.Scene {
       this.player.jump();
     });
 
-    this.#handleInput();
+    this.#handleMove();
   }
 
   nextLevel() {
@@ -172,17 +168,15 @@ export default class Level3 extends Phaser.Scene {
     this.scene.stop("Level3");
   }
 
-  #handleInput() {
-    this.keys.right.on("down", () => this.#handleMove());
-    this.keys.right.on("up", () => this.#handleMove());
+  #handleMove() {
+    this.player.moveRight(); // Se déplace à droite
+    this.chicken.moveRight(); // Le poulet se déplace à droite
   }
 
-  #handleMove() {
-    const right = this.keys.right.isDown;
-
-    if (right) {
-      this.player.moveRight(); // Se déplace à droite
-      this.chicken.moveRight(); // Le poulet se déplace à droite
-    }
+  resetPlayerPositionWithDelay() {
+    this.player.setPosition(1 * 64, 6 * 64); // Position initiale : (1, 6)
+    this.time.delayedCall(200, () => {
+      this.#handleMove();
+    });
   }
 }

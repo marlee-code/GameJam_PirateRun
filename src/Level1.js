@@ -1,12 +1,12 @@
 import SandGroup from "./SandGroup";
+import PlatformGroup from "./PlatformGroup";
 
+import KnightGroup from "./KnightGroup";
+import Knight from "./Knight";
 import Pirate from "./Pirate";
 import Chicken from "./Chicken";
 
 import Phaser from "phaser";
-import PlatformGroup from "./PlatformGroup";
-import KnightGroup from "./KnightGroup";
-import Knight from "./Knight";
 
 /**
  * Scène du premier niveau.
@@ -14,7 +14,7 @@ import Knight from "./Knight";
 export default class Level1 extends Phaser.Scene {
   constructor() {
     super({ key: "Level1" });
-    this.sandGroup = null; // Groupe de sol
+    this.sandGroup = null; // Groupe de blocks de sable
     this.player = null; // Instance du joueur
     this.chicken = null; // Instance du poulet
     this.keys = {}; // Stocke les touches
@@ -22,21 +22,20 @@ export default class Level1 extends Phaser.Scene {
   }
 
   preload() {
-    SandGroup.preload(this); // Précharge l'image pour les pierres.
-    Pirate.preload(this); // Charge l'image du joueur
+    SandGroup.preload(this); // Précharge l'image pour le sable.
+    Pirate.preload(this); // Charge l'image du pirate
     Chicken.preload(this); // Charge l'image du poulet
-    Knight.preload(this); // Charge l'image du knight
+    Knight.preload(this); // Charge l'image du chevalier
     PlatformGroup.preload(this); // Charge l'image de la plateforme
-    this.load.image("tropicalBackground", "img/tropic.webp");
-    this.load.image("wood", "img/wood.png");
+    this.load.image("tropicalBackground", "img/tropic.webp"); // Charge l'image de fond
+    this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
-    this.load.image("tutoriel2", "img/tutoriel2.png"); // Charge l'image du tutoriel2
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
   }
 
   create() {
     // Dimensions du niveau
-    const levelWidth = 23 * 64 * 4; // 24 colonnes de 64 pixels (largeur totale du niveau)
+    const levelWidth = 23 * 64 * 4; // 23*4 colonnes de 64 pixels (largeur totale du niveau)
     const levelHeight = 9 * 64; // 9 lignes de 64 pixels (hauteur totale du niveau)
 
     this.background = this.add
@@ -55,37 +54,18 @@ export default class Level1 extends Phaser.Scene {
       .setScrollFactor(0);
 
     // Ajouter l'image du tutoriel2 à côté de l'image du tutoriel
-    const tutoriel2Image = this.add
-      .image(this.cameras.main.width - 10, 10, "tutoriel2")
-      .setOrigin(1, 0)
-      .setScrollFactor(0);
-
-    // Ajouter l'image du tutoriel en haut à droite de l'écran
     const tutorielImage = this.add
-      .image(
-        this.cameras.main.width - 20 - tutoriel2Image.width,
-        10,
-        "tutoriel",
-      )
+      .image(this.cameras.main.width - 10, 10, "tutoriel")
       .setOrigin(1, 0)
       .setScrollFactor(0);
 
-    // Animer l'image du tutoriel pour qu'elle disparaisse après 5 secondes
+    // Animer l'image du tutoriel pour qu'elle disparaisse après 10 secondes
     this.tweens.add({
       targets: tutorielImage,
       alpha: 0,
       ease: "Power1",
       duration: 1000, // Durée de l'animation (1 seconde)
-      delay: 5000, // Délai avant le début de l'animation (5 secondes)
-    });
-
-    // Animer l'image du tutoriel2 pour qu'elle disparaisse après 17 secondes
-    this.tweens.add({
-      targets: tutoriel2Image,
-      alpha: 0,
-      ease: "Power1",
-      duration: 1000, // Durée de l'animation (1 seconde)
-      delay: 17000, // Délai avant le début de l'animation (17 secondes)
+      delay: 10000, // Délai avant le début de l'animation (10 secondes)
     });
 
     // Définir les limites du monde physique
