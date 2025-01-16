@@ -100,6 +100,14 @@ export default class Level1 extends Phaser.Scene {
 
     this.sound.add("game-start").play();
 
+    // Créer les animations pour le poulet
+    this.anims.create({
+      key: "chicken_walk",
+      frames: this.anims.generateFrameNumbers("chicken", { start: 0, end: 2 }),
+      frameRate: 3,
+      repeat: -1,
+    });
+
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.sandGroup); // Gestion des collisions

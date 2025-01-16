@@ -82,13 +82,13 @@ export default class Level2 extends Phaser.Scene {
 
     //Ajout des blocs de platforme
     this.platformGroup = new PlatformGroup(this);
-    this.platformGroup.addTiles(4, 6, 3, 1); 
-    this.platformGroup.addTiles(10, 5, 7, 1); 
-    this.platformGroup.addTiles(20, 6, 6, 1); 
-    this.platformGroup.addTiles(40, 6, 3, 1); 
-    this.platformGroup.addTiles(45, 4, 10, 1); 
-    this.platformGroup.addTiles(60, 6, 8, 1); 
-    this.platformGroup.addTiles(70, 4, 6, 1); 
+    this.platformGroup.addTiles(4, 6, 3, 1);
+    this.platformGroup.addTiles(10, 5, 7, 1);
+    this.platformGroup.addTiles(20, 6, 6, 1);
+    this.platformGroup.addTiles(40, 6, 3, 1);
+    this.platformGroup.addTiles(45, 4, 10, 1);
+    this.platformGroup.addTiles(60, 6, 8, 1);
+    this.platformGroup.addTiles(70, 4, 6, 1);
 
     // Configurer la caméra
     this.cameras.main.setBounds(0, 0, levelWidth, levelHeight); // Limites de la caméra
@@ -109,6 +109,14 @@ export default class Level2 extends Phaser.Scene {
 
     this.sound.add("game-start").play();
 
+    // Créer les animations pour le poulet
+    this.anims.create({
+      key: "chicken_walk",
+      frames: this.anims.generateFrameNumbers("chicken", { start: 0, end: 2 }),
+      frameRate: 3,
+      repeat: -1,
+    });
+
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.grassGroup); // Gestion des collisions
@@ -123,7 +131,7 @@ export default class Level2 extends Phaser.Scene {
 
     // Ajouter des chevaliers
     this.knightGroup = new KnightGroup(this);
-    this.knightGroup.addKnight(5, 6); 
+    this.knightGroup.addKnight(5, 6);
     this.knightGroup.addKnight(10, 6);
     this.knightGroup.addKnight(25, 5);
     this.knightGroup.addKnight(35, 6);
