@@ -76,10 +76,14 @@ export default class Title extends Phaser.Scene {
     );
 
     this.keys.SPACE.on("down", () => {
-      this.scene.start("Level1");
-      this.backgroundMusic.stop();
-      this.scene.stop("Title");
+      this.nextLevel();
     });
+  }
+
+  nextLevel() {
+    this.backgroundMusic.stop();
+    this.scene.start("Level1");
+    this.scene.stop("Title");
   }
 
   update() {

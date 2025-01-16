@@ -11,7 +11,7 @@ export default class End extends Phaser.Scene {
 
   preload() {
     this.load.image("tropicalBackground", "img/tropic.webp");
-    this.load.audio("background-music", "sound/music_fond.mp3");
+    this.load.audio("music_end", "sound/music_end.mp3");
   }
 
   create() {
@@ -23,7 +23,7 @@ export default class End extends Phaser.Scene {
     // La largeur (8000) peut être adaptée à la taille totale du monde.
 
     // Jouer la musique de fond en boucle
-    this.backgroundMusic = this.sound.add("music_fond", { loop: true });
+    this.backgroundMusic = this.sound.add("music_end", { loop: true });
     this.backgroundMusic.play();
 
     // Ajouter le titre
