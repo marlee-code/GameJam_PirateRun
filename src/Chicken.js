@@ -44,7 +44,7 @@ export default class Chicken extends Phaser.GameObjects.Sprite {
   }
 
   moveRight() {
-    this.#move(400);
+    this.#move(424);
     this.anims.play("chicken_walk", true);
     return this;
   }
