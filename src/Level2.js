@@ -150,7 +150,7 @@ export default class Level2 extends Phaser.Scene {
 
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
-      this.player.setPosition(1, 4); // Réinitialiser la position du joueur
+      this.resetPlayerPositionWithDelay();
     });
 
     // Gestion des collisions entre le sol et les chevaliers
@@ -192,7 +192,7 @@ export default class Level2 extends Phaser.Scene {
 
   resetPlayerPositionWithDelay() {
     this.player.setPosition(1 * 64, 6 * 64); // Position initiale : (1, 6)
-    this.time.delayedCall(200, () => {
+    this.time.delayedCall(400, () => {
       this.#handleMove();
     });
   }
