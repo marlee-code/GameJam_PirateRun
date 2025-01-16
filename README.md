@@ -39,8 +39,10 @@ Si le pirate rencontre un chevalier, il retourne au départ.
 Sound Effect by freesound_community from Pixabay
 
 # music_fond.mp3
+# music_fond2.mp3
 # music_fond3.mp3
-Marion COLLARD
+# music_end.mp3
+Marion COLLARD sur Chrome Music LAb
 
 # Design des personnages et des blocks de sol
 Adrien CADALEN
