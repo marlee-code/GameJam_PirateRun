@@ -25,6 +25,31 @@ sudo apt install npm
 npm run dev
 ```
 
+## Commandes
 
+Espace pour démarrer la partie.
+Espace pour sauter.
+
+Si le pirate rencontre un chevalier, il retourne au départ.
+
+
+## Crédits
+
+# game-start.mp3
 Sound Effect by freesound_community from Pixabay
-game-start.mp3
+
+# Design des personnages et des blocks de sol
+Adrien CADALEN
+
+# Frames et platformes
+Marion COLLARD
+
+# Fonds des niveaux 
+ChatGPT
+
+# Développeurs
+Marion COLLARD - Adrien CADALEN
+
+# Assistant 
+ChatGPT
+
