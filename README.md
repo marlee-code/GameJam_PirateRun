@@ -59,3 +59,6 @@ Marion COLLARD - Adrien CADALEN
 # Assistant 
 ChatGPT
 
+## Vidéo
+https://youtu.be/9r40BTnWol8
+
