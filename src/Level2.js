@@ -21,6 +21,7 @@ export default class Level2 extends Phaser.Scene {
     this.chicken = null; // Instance du poulet
     this.keys = {}; // Stocke les touches
     this.background = null; // Arrière-plan
+    this.backgroundMusic = null; // Musique de fond
   }
 
   preload() {
@@ -34,7 +35,7 @@ export default class Level2 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
-    this.load.audio("music_fond", "sound/music_fond.mp3"); // Charge la musique
+    this.load.audio("music_fond2", "sound/music_fond2.mp3"); // Charge la musique
   }
 
   create() {
@@ -59,7 +60,7 @@ export default class Level2 extends Phaser.Scene {
 
     // Ajouter l'image du tutoriel2 à côté de l'image du tutoriel
     const tutorielImage = this.add
-      .image(this.cameras.main.width - 10, 10, "tutoriel2")
+      .image(this.cameras.main.width - 10, 10, "tutoriel")
       .setOrigin(1, 0)
       .setScrollFactor(0);
 
@@ -110,7 +111,7 @@ export default class Level2 extends Phaser.Scene {
 
     this.sound.add("game-start").play();
 
-    this.backgroundMusic = this.sound.add("music_fond", { loop: true });
+    this.backgroundMusic = this.sound.add("music_fond2", { loop: true });
     this.backgroundMusic.play();
 
     // Créer les animations pour le poulet

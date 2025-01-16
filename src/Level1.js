@@ -19,6 +19,7 @@ export default class Level1 extends Phaser.Scene {
     this.chicken = null; // Instance du poulet
     this.keys = {}; // Stocke les touches
     this.background = null; // Arrière-plan
+    this.backgroundMusic = null; // Musique de fond
   }
 
   preload() {
@@ -175,7 +176,7 @@ export default class Level1 extends Phaser.Scene {
   }
 
   nextLevel() {
-    this.scene.start("End");
+    this.scene.start("Level2");
     this.backgroundMusic.stop();
     this.scene.stop("Level1");
   }
