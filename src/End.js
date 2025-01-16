@@ -22,6 +22,10 @@ export default class End extends Phaser.Scene {
       .setOrigin(0, 0);
     // La largeur (8000) peut être adaptée à la taille totale du monde.
 
+    // Jouer la musique de fond en boucle
+    this.backgroundMusic = this.sound.add("music_fond", { loop: true });
+    this.backgroundMusic.play();
+
     // Ajouter le titre
     const title = this.add
       .text(width / 2, -50, "Fin du Jeu", {

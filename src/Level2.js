@@ -110,6 +110,9 @@ export default class Level2 extends Phaser.Scene {
 
     this.sound.add("game-start").play();
 
+    this.backgroundMusic = this.sound.add("music_fond", { loop: true });
+    this.backgroundMusic.play();
+
     // Créer les animations pour le poulet
     this.anims.create({
       key: "chicken_walk",
@@ -182,6 +185,7 @@ export default class Level2 extends Phaser.Scene {
   }
 
   nextLevel() {
+    this.backgroundMusic.stop();
     this.scene.start("Level3");
     this.scene.stop("Level2");
   }

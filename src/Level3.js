@@ -31,7 +31,7 @@ export default class Level3 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
-    this.load.audio("music_fond", "sound/music_fond.mp3"); // Charge la musique
+    this.load.audio("music_fond3", "sound/music_fond3.mp3"); // Charge la musique
   }
 
   create() {
@@ -178,9 +178,20 @@ export default class Level3 extends Phaser.Scene {
     });
 
     this.#handleMove();
+
+    // Jouer la musique de fond en boucle
+    if (this.sound.get("music_fond")) {
+      this.sound.get("music_fond").stop();
+    }
+    this.backgroundMusic = this.sound.add("music_fond3", { loop: true });
+    this.backgroundMusic.play();
   }
 
   nextLevel() {
+    // Arrêter la musique de fond
+    if (this.backgroundMusic) {
+      this.backgroundMusic.stop();
+    }
     this.scene.start("End");
     this.scene.stop("Level3");
   }

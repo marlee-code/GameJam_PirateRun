@@ -7,11 +7,12 @@ export default class Title extends Phaser.Scene {
   constructor() {
     super({ key: "Title" });
     this.background = null; // Arrière-plan
+    this.backgroundMusic = null; // Musique de fond
   }
 
   preload() {
     this.load.image("tropicalBackground", "img/tropic.webp");
-    this.load.audio("background-music", "sound/music_fond.mp3");
+    this.load.audio("music_fond", "sound/music_fond.mp3");
   }
 
   create() {
@@ -23,6 +24,10 @@ export default class Title extends Phaser.Scene {
       .tileSprite(0, 0, 800, 1024, "tropicalBackground")
       .setOrigin(0, 0);
     // La largeur (8000) peut être adaptée à la taille totale du monde.
+
+    // Jouer la musique de fond en boucle
+    this.backgroundMusic = this.sound.add("music_fond", { loop: true });
+    this.backgroundMusic.play();
 
     const title = this.add
       .text(width / 2, height / 3, "Pirate Run")
@@ -72,12 +77,9 @@ export default class Title extends Phaser.Scene {
 
     this.keys.SPACE.on("down", () => {
       this.scene.start("Level1");
+      this.backgroundMusic.stop();
       this.scene.stop("Title");
     });
-
-    // Jouer la musique de fond en boucle
-    this.backgroundMusic = this.sound.add("background-music", { loop: true });
-    this.backgroundMusic.play();
   }
 
   update() {
