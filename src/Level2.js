@@ -151,6 +151,7 @@ export default class Level2 extends Phaser.Scene {
     // Jouer l'animation pour chaque chevalier
     this.knightGroup.children.iterate((knight) => {
       knight.anims.play("knight_walk");
+      this.sound.add("game-start").play(); // Joue la musique
     });
 
     // Gestion des collisions entre le joueur et les chevaliers

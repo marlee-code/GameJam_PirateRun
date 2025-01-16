@@ -32,7 +32,7 @@ export default class Level1 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
-    this.load.audio("music_fond", "sound/music_fond.mp3"); // Charge la musique
+    this.load.audio("music_fond1", "sound/music_fond.mp3"); // Charge la musique
   }
 
   create() {
@@ -102,7 +102,7 @@ export default class Level1 extends Phaser.Scene {
 
     this.sound.add("game-start").play(); // Joue la musique
 
-    this.backgroundMusic = this.sound.add("music_fond", { loop: true });
+    this.backgroundMusic = this.sound.add("music_fond1", { loop: true });
     this.backgroundMusic.play();
 
     // Créer les animations pour le poulet
@@ -146,6 +146,7 @@ export default class Level1 extends Phaser.Scene {
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
       this.resetPlayerPositionWithDelay();
+      this.sound.add("game-start").play(); // Joue la musique
     });
 
     // Gestion des collisions entre le sol et les chevaliers
