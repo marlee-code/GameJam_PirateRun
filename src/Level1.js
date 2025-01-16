@@ -31,6 +31,7 @@ export default class Level1 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
+    this.load.audio("music_fond", "sound/music_fond.mp3"); // Charge la musique
   }
 
   create() {
@@ -98,7 +99,7 @@ export default class Level1 extends Phaser.Scene {
     this.physics.add.collider(this.player, this.sandGroup); // Gestion des collisions
     this.physics.add.collider(this.player, this.platformGroup); // Gestion des collisions
 
-    this.sound.add("game-start").play();
+    this.sound.add("game-start").play(); // Joue la musique
 
     // Créer les animations pour le poulet
     this.anims.create({

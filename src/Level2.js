@@ -34,6 +34,7 @@ export default class Level2 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
+    this.load.audio("music_fond", "sound/music_fond.mp3"); // Charge la musique
   }
 
   create() {

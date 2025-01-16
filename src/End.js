@@ -11,6 +11,7 @@ export default class End extends Phaser.Scene {
 
   preload() {
     this.load.image("tropicalBackground", "img/tropic.webp");
+    this.load.audio("background-music", "sound/music_fond.mp3");
   }
 
   create() {

@@ -11,6 +11,7 @@ export default class Title extends Phaser.Scene {
 
   preload() {
     this.load.image("tropicalBackground", "img/tropic.webp");
+    this.load.audio("background-music", "sound/music_fond.mp3");
   }
 
   create() {
@@ -73,6 +74,10 @@ export default class Title extends Phaser.Scene {
       this.scene.start("Level1");
       this.scene.stop("Title");
     });
+
+    // Jouer la musique de fond en boucle
+    this.backgroundMusic = this.sound.add("background-music", { loop: true });
+    this.backgroundMusic.play();
   }
 
   update() {
