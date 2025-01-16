@@ -44,7 +44,7 @@ export default class Pirate extends Phaser.GameObjects.Sprite {
   }
 
   moveRight() {
-    this.#move(500);
+    this.#move(400);
     this.anims.play("walk", true);
     return this;
   }

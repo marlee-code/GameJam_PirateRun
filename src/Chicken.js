@@ -17,12 +17,15 @@ export default class Chicken extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds(true); // Empêche de sortir des limites
 
     this.currentTween = null; // Stocke le tween actif
+
+    //Définir la frame initiale
+    this.setFrame(1);
   }
 
   static preload(scene) {
     scene.load.spritesheet(Chicken.key, "img/chicken.png", {
-      frameWidth: 256,
-      frameHeight: 256,
+      frameWidth: 64,
+      frameHeight: 64,
     });
   }
 
@@ -41,7 +44,8 @@ export default class Chicken extends Phaser.GameObjects.Sprite {
   }
 
   moveRight() {
-    this.#move(500);
+    this.#move(400);
+    this.anims.play("chicken_walk", true);
     return this;
   }
 }
