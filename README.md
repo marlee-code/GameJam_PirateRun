@@ -1,6 +1,6 @@
 # GAMEJAM NO DATA - PIRATERUN
 
-## AUTEUR
+## AUTEURS
 
 COLLARD Marion
 
@@ -38,6 +38,7 @@ Si le pirate rencontre un chevalier, il retourne au départ.
 # game-start.mp3
 Sound Effect by freesound_community from Pixabay
 
+# music_title.mp3
 # music_fond.mp3
 # music_fond2.mp3
 # music_fond3.mp3
