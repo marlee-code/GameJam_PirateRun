@@ -78,7 +78,7 @@ export default class Level1 extends Phaser.Scene {
 
     //Ajout des blocs de platforme
     this.platformGroup = new PlatformGroup(this);
-    this.platformGroup.addTiles(40, 6, 3, 1); 
+    this.platformGroup.addTiles(40, 6, 3, 1);
     this.platformGroup.addTiles(45, 4, 10, 1);
 
     // Configurer la caméra
@@ -122,9 +122,9 @@ export default class Level1 extends Phaser.Scene {
 
     // Ajouter des chevaliers
     this.knightGroup = new KnightGroup(this);
-    this.knightGroup.addKnight(8, 6); 
+    this.knightGroup.addKnight(8, 6);
     this.knightGroup.addKnight(18, 4);
-    this.knightGroup.addKnight(25, 6); 
+    this.knightGroup.addKnight(25, 6);
     this.knightGroup.addKnight(40, 6);
     this.knightGroup.addKnight(45, 4);
     this.knightGroup.addKnight(53, 4);
@@ -132,7 +132,7 @@ export default class Level1 extends Phaser.Scene {
     this.knightGroup.addKnight(73, 4);
     this.knightGroup.addKnight(79, 4);
     this.knightGroup.addKnight(87, 4);
-    
+
     // Jouer l'animation pour chaque chevalier
     this.knightGroup.children.iterate((knight) => {
       knight.anims.play("knight_walk");
