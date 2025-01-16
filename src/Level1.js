@@ -14,7 +14,7 @@ import Knight from "./Knight";
 export default class Level1 extends Phaser.Scene {
   constructor() {
     super({ key: "Level1" });
-    this.floorGroup = null; // Groupe de sol
+    this.sandGroup = null; // Groupe de sol
     this.player = null; // Instance du joueur
     this.chicken = null; // Instance du poulet
     this.keys = {}; // Stocke les touches
@@ -92,9 +92,9 @@ export default class Level1 extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, levelWidth, levelHeight);
 
     // Configurer les blocs de sable
-    this.floorGroup = new SandGroup(this);
-    this.floorGroup.addTiles(0, 9, 100, 1); // Sol de pierres (col 0-99, ligne 9)
-    this.floorGroup.addTiles(0, 8, 100, 1); // Sol de pierres (col 0-99, ligne 8)
+    this.sandGroup = new SandGroup(this);
+    this.sandGroup.addTiles(0, 9, 100, 1); // Sol de pierres (col 0-99, ligne 9)
+    this.sandGroup.addTiles(0, 8, 100, 1); // Sol de pierres (col 0-99, ligne 8)
 
     //Ajout des blocs de platforme
     this.platformGroup = new PlatformGroup(this);
@@ -110,16 +110,32 @@ export default class Level1 extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, levelWidth, levelHeight); // Limites de la caméra
     this.cameras.main.setZoom(1);
 
+    // Créer les animations pour le pirate
+    this.anims.create({
+      key: "walk",
+      frames: this.anims.generateFrameNumbers("pirate", { start: 0, end: 7 }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
     // Ajouter un joueur
     this.player = new Pirate(this, 1, 6); // Position initiale : (1, 4), ajusté pour être sur la plateforme
-    this.physics.add.collider(this.player, this.floorGroup); // Gestion des collisions
+    this.physics.add.collider(this.player, this.sandGroup); // Gestion des collisions
     this.physics.add.collider(this.player, this.platformGroup); // Gestion des collisions
 
     this.sound.add("game-start").play();
 
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
-    this.physics.add.collider(this.chicken, this.floorGroup); // Gestion des collisions
+    this.physics.add.collider(this.chicken, this.sandGroup); // Gestion des collisions
+
+    // Créer l'animation pour le chevalier
+    this.anims.create({
+      key: "knight_walk",
+      frames: this.anims.generateFrameNumbers("knight", { start: 0, end: 5 }),
+      frameRate: 3,
+      repeat: -1,
+    });
 
     // Ajouter des chevaliers
     this.knightGroup = new KnightGroup(this);
@@ -131,13 +147,18 @@ export default class Level1 extends Phaser.Scene {
     this.knightGroup.addKnight(66, 6); // Position initiale : (66, 6)
     this.knightGroup.addKnight(78, 6); // Position initiale : (78, 6)
 
+    // Jouer l'animation pour chaque chevalier
+    this.knightGroup.children.iterate((knight) => {
+      knight.anims.play("knight_walk");
+    });
+
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
       this.resetPlayerPositionWithDelay();
     });
 
     // Gestion des collisions entre le sol et les chevaliers
-    this.physics.add.collider(this.knightGroup, this.floorGroup);
+    this.physics.add.collider(this.knightGroup, this.sandGroup);
     this.physics.add.collider(this.knightGroup, this.platformGroup);
 
     this.physics.add.overlap(

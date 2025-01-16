@@ -32,6 +32,7 @@ export default class Level3 extends Phaser.Scene {
     this.load.image("wood", "img/wood.png");
     this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.image("tutoriel2", "img/tutoriel2.png"); // Charge l'image du tutoriel2
+    this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
   }
 
   create() {
@@ -115,15 +116,21 @@ export default class Level3 extends Phaser.Scene {
     this.physics.add.collider(this.player, this.stoneGroup); // Gestion des collisions
     this.physics.add.collider(this.player, this.platformGroup); // Gestion des collisions
 
+    this.sound.add("game-start").play();
+
     // Ajouter un poulet
     this.chicken = new Chicken(this, 10, 4); // Position initiale : (1, 10), ajusté pour être sur la plateforme
     this.physics.add.collider(this.chicken, this.stoneGroup); // Gestion des collisions
 
     // Ajouter des chevaliers
     this.knightGroup = new KnightGroup(this);
-    this.knightGroup.addKnight(5, 4); // Position initiale : (5, 4)
+    this.knightGroup.addKnight(5, 6); // Position initiale : (5, 6)
     this.knightGroup.addKnight(15, 4); // Position initiale : (15, 4)
     this.knightGroup.addKnight(25, 6); // Position initiale : (25, 4)
+    this.knightGroup.addKnight(40, 4); // Position initiale : (40, 4)
+    this.knightGroup.addKnight(60, 4); // Position initiale : (60, 4)
+    this.knightGroup.addKnight(66, 6); // Position initiale : (66, 6)
+    this.knightGroup.addKnight(78, 6); // Position initiale : (78, 6)
 
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
@@ -131,7 +138,7 @@ export default class Level3 extends Phaser.Scene {
     });
 
     // Gestion des collisions entre le sol et les chevaliers
-    this.physics.add.collider(this.knightGroup, this.floorGroup);
+    this.physics.add.collider(this.knightGroup, this.stoneGroup);
     this.physics.add.collider(this.knightGroup, this.platformGroup);
 
     this.physics.add.overlap(
