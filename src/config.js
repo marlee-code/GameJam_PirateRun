@@ -6,7 +6,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: true, // Activer le débogage pour visualiser les corps physiques
+      debug: false, // désactive le débogage pour visualiser les corps physiques
       gravity: { y: 1000 }, // Ajouter de la gravité si nécessaire
     },
   },
