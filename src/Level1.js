@@ -30,7 +30,7 @@ export default class Level1 extends Phaser.Scene {
     PlatformGroup.preload(this); // Charge l'image de la plateforme
     this.load.image("tropicalBackground", "img/tropic.webp"); // Charge l'image de fond
     this.load.image("wood", "img/wood.png"); // Charge l'image de fond du titre
-    this.load.image("tutoriel", "img/tutoriel.png"); // Charge l'image du tutoriel
+    this.load.image("tutoriel2", "img/tutoriel.png"); // Charge l'image du tutoriel
     this.load.audio("game-start", "sound/game-start.mp3"); // Charge la musique
     this.load.audio("music_fond1", "sound/music_fond.mp3"); // Charge la musique
   }
@@ -57,7 +57,7 @@ export default class Level1 extends Phaser.Scene {
 
     // Ajouter l'image du tutoriel2 à côté de l'image du tutoriel
     const tutorielImage = this.add
-      .image(this.cameras.main.width - 10, 10, "tutoriel")
+      .image(this.cameras.main.width - 10, 10, "tutoriel2")
       .setOrigin(1, 0)
       .setScrollFactor(0);
 
@@ -146,7 +146,6 @@ export default class Level1 extends Phaser.Scene {
     // Gestion des collisions entre le joueur et les chevaliers
     this.physics.add.collider(this.player, this.knightGroup, () => {
       this.resetPlayerPositionWithDelay();
-      this.sound.add("game-start").play(); // Joue la musique
     });
 
     // Gestion des collisions entre le sol et les chevaliers
