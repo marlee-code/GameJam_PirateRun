@@ -185,14 +185,14 @@ export default class Level3 extends Phaser.Scene {
   }
 
   #handleMove() {
-    this.player.moveRight(); // Se déplace à droite
+    this.time.delayedCall(400, () => {
+      this.player.moveRight(); // Se déplace à droite
+    });
     this.chicken.moveRight(); // Le poulet se déplace à droite
   }
 
   resetPlayerPositionWithDelay() {
     this.player.setPosition(1 * 64, 6 * 64); // Position initiale : (1, 6)
-    this.time.delayedCall(200, () => {
-      this.#handleMove();
-    });
+    this.#handleMove();
   }
 }
