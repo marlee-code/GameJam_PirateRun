@@ -78,13 +78,13 @@ export default class Level3 extends Phaser.Scene {
 
     //Ajout des blocs de platforme
     this.platformGroup = new PlatformGroup(this);
-    this.platformGroup.addTiles(4, 6, 3, 1); // Sol de pierres (col 4-6, ligne 7)
-    this.platformGroup.addTiles(10, 5, 7, 1); // Sol de pierres (col 10-16, ligne 6)
-    this.platformGroup.addTiles(20, 6, 6, 1); // Sol de pierres (col 20-25, ligne 7)
-    this.platformGroup.addTiles(40, 6, 3, 1); // Sol de pierres (col 40-42, ligne 7)
-    this.platformGroup.addTiles(45, 4, 10, 1); // Sol de pierres (col 40-49, ligne 5)
-    this.platformGroup.addTiles(60, 6, 8, 1); // Sol de pierres (col 60-65, ligne 7)
-    this.platformGroup.addTiles(70, 4, 6, 1); // Sol de pierres (col 70-75, ligne 5)
+    this.platformGroup.addTiles(4, 6, 3, 1); 
+    this.platformGroup.addTiles(10, 5, 7, 1); 
+    this.platformGroup.addTiles(20, 6, 6, 1); 
+    this.platformGroup.addTiles(40, 6, 7, 1); 
+    this.platformGroup.addTiles(40, 4, 7, 1); 
+    this.platformGroup.addTiles(55, 6, 8, 1); 
+    this.platformGroup.addTiles(65, 4, 6, 1); 
 
     // Configurer la caméra
     this.cameras.main.setBounds(0, 0, levelWidth, levelHeight); // Limites de la caméra
@@ -119,13 +119,21 @@ export default class Level3 extends Phaser.Scene {
 
     // Ajouter des chevaliers
     this.knightGroup = new KnightGroup(this);
-    this.knightGroup.addKnight(5, 6); // Position initiale : (5, 6)
-    this.knightGroup.addKnight(15, 4); // Position initiale : (15, 4)
-    this.knightGroup.addKnight(25, 6); // Position initiale : (25, 4)
-    this.knightGroup.addKnight(40, 4); // Position initiale : (40, 4)
-    this.knightGroup.addKnight(60, 4); // Position initiale : (60, 4)
-    this.knightGroup.addKnight(66, 6); // Position initiale : (66, 6)
-    this.knightGroup.addKnight(78, 6); // Position initiale : (78, 6)
+    this.knightGroup.addKnight(5, 6); 
+    this.knightGroup.addKnight(13, 5);
+    this.knightGroup.addKnight(15, 4);
+    this.knightGroup.addKnight(16, 5);
+    this.knightGroup.addKnight(25, 5);
+    this.knightGroup.addKnight(30, 6);
+    this.knightGroup.addKnight(46, 5); 
+    this.knightGroup.addKnight(46, 6);
+    this.knightGroup.addKnight(55, 4);
+    this.knightGroup.addKnight(62, 6);
+    this.knightGroup.addKnight(65, 6);
+    this.knightGroup.addKnight(70, 6);
+    this.knightGroup.addKnight(70, 3);
+    this.knightGroup.addKnight(80, 6);
+    this.knightGroup.addKnight(80.5, 6);
 
     // Jouer l'animation pour chaque chevalier
     this.knightGroup.children.iterate((knight) => {
