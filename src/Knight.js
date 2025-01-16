@@ -19,12 +19,15 @@ export default class Knight extends Phaser.GameObjects.Sprite {
     this.body.pushable = false; // Empêche d'être poussé par d'autres objets
 
     this.currentTween = null; // Stocke le tween actif
+
+    // Jouer l'animation de marche en boucle
+    this.anims.play("knight_walk");
   }
 
   static preload(scene) {
     scene.load.spritesheet(Knight.key, "img/knight.png", {
-      frameWidth: 256,
-      frameHeight: 256,
+      frameWidth: 75,
+      frameHeight: 100,
     });
   }
 }

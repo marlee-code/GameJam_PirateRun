@@ -17,12 +17,15 @@ export default class Pirate extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds(true); // Empêche de sortir des limites
 
     this.currentTween = null; // Stocke le tween actif
+
+    //Définir la frame initiale
+    this.setFrame(0);
   }
 
   static preload(scene) {
     scene.load.spritesheet(Pirate.key, "img/pirate.png", {
-      frameWidth: 256,
-      frameHeight: 256,
+      frameWidth: 75,
+      frameHeight: 100,
     });
   }
 
@@ -42,6 +45,7 @@ export default class Pirate extends Phaser.GameObjects.Sprite {
 
   moveRight() {
     this.#move(500);
+    this.anims.play("walk", true);
     return this;
   }
 
@@ -49,6 +53,7 @@ export default class Pirate extends Phaser.GameObjects.Sprite {
     if (this.body.blocked.down) {
       // Vérifie que le joueur touche le sol
       this.body.setVelocityY(-800); // Applique une force vers le haut
+      this.setFrame(0); // Change la frame
     }
     return this;
   }
