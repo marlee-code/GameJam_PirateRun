@@ -1,50 +1,51 @@
 # GAMEJAM NO DATA - PIRATERUN
-
-## AUTEURS
-
+# AUTHORS
 COLLARD Marion
-
 CADALEN Adrien
 
-# Installation / configuration
+# Installation / Configuration
 
-## Lancer le jeu en mode dev 
-```
-npm run dev
-```
+## Run the Game in Dev Mode
 
-## Commandes
+```npm run dev```
 
-Espace pour démarrer la partie.
-Espace pour sauter.
+## Controls
 
-Si le pirate rencontre un chevalier, il retourne au départ.
+Press Space to start the game.
+Press Space to jump.
 
+If the pirate encounters a knight, they return to the starting point.
 
-## Crédits
+## Credits
 
-# game-start.mp3
+# Sounds & Music
+## game-start.mp3
 Sound Effect by freesound_community from Pixabay
 
-# music_title.mp3
-# music_fond.mp3
-# music_fond2.mp3
-# music_fond3.mp3
-# music_end.mp3
-Marion COLLARD sur Chrome Music LAb
+## music_title.mp3
 
-# Design des personnages et des blocks de sol
+## music_fond.mp3
+
+## music_fond2.mp3
+
+## music_fond3.mp3
+
+## music_end.mp3
+Created by Marion COLLARD using Chrome Music Lab
+
+# Design
+## Character and ground block design
 Adrien CADALEN
 
-# Frames et platformes
+## Frames and platforms: 
 Marion COLLARD
 
-# Fonds des niveaux 
+## Level backgrounds: 
 ChatGPT
 
-# Développeurs
+## Developers
 Marion COLLARD - Adrien CADALEN
 
-# Assistant 
+## Assistant
 ChatGPT
 
